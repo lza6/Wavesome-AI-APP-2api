@@ -22,3 +22,6 @@ tools/frida-server-*
 
 # 恢复后自动抓的样本
 evidence/recovered_*
+
+# 本地 git bundle 兜底（不入库）
+*.bundle
