@@ -159,7 +159,7 @@ if (pushDeviceToken.length() != 0) aVar.f13890c.a("device-token", pushDeviceToke
 | 用 FIS authToken 继续调 `fcmregistrations.googleapis.com/v1/projects/wavesome-ai/registrations` 换 FCM token | **失败**：`RegisterRequest` 只认 `android.package_name` 一个字段，其余全部 `Unknown name`；该 REST 面不签发 Android token（真 token 由 GmsCore 走 MCS 连接签发）。公开 discovery 文档里也没有这个资源 |
 | 把 FIS authToken / FID 直接当 `device-token` 用 | 上游 `Token Error` |
 | **Android 30 google_apis AVD（root）+ 装原包 + 等 FCM 注册完成**，从 `ACCOUNT_PREFERENCES.xml` 取出真实 `pushDeviceToken` | 拿得到真 token（`…:APA91b…`），但上游 **仍然 `Token Error`** |
-| **同一个 AVD 里用真实 App 自己点 Create 生成** | **App 自己也弹 `Token Error. Please contact support!`** ← 决定性证据 |
+| **同一个 AVD 里用真实 App 自己点 Create 生成** | **App 自己也弹 `Token Error. Please contact support!`** ← 决定性证据（截图 `probe/screen5.png`） |
 | `pm clear` 换全新设备身份（新 FCM token）后直接打 API | 依旧 `Token Error` |
 | 自报 premium：`PUT device/ {"premium":"sub"}` 后再生成（"sub" 是 App 里唯一的 premium 词汇） | 依旧 `Token Error` |
 | `api-country` 遍历 US/DE/BR/IN/ID/PH/VN/RU/TR/MX | 全部 `Token Error`（该头不影响） |

@@ -1,6 +1,10 @@
 # Wavesome.AI v1.0.31 → 2API（R1）
 
-> 逆向 + 本地网关 + 压测 + demo 页。协议全文见 [`docs/PROTOCOL.md`](docs/PROTOCOL.md)。
+> 逆向 + 本地网关 + 压测 + demo 页。协议全文见 [`docs/PROTOCOL.md`](docs/PROTOCOL.md)，对接见 [`docs/NEW-API-HANDOFF.md`](docs/NEW-API-HANDOFF.md)。
+> 仓库：<https://github.com/lza6/Wavesome-AI-APP-2api>
+
+**一句话结论**：协议已 100% 还原（身份 = FCM token，无签名无校验），但**上游出图端点对所有设备失效**
+（连真机 App 自己点生成也报 `Token Error`，截图 `probe/screen5.png`），当前只能交付「公开端点 + 恢复探测 + 随时可上线的渠道代码」。
 
 ## 30 秒跑起来
 
