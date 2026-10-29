@@ -1,0 +1,2 @@
+<从模拟器 App 的 shared_prefs 里取到的真实 FCM token（形如 xxxxx:APA91b...）>
+用 python tools/token_from_emulator.py --serial emulator-5556 获取

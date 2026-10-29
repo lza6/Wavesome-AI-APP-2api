@@ -1,0 +1,73 @@
+# Wavesome.AI 上游协议探测原始记录
+# 时间: 2026-10-29T22:19:59Z  出口IP: {"countryCode":"IT","query":"80.174.118.92"}
+# device-token (真实, 模拟器 App 内提取): <REDACTED_FCM_TOKEN>
+
+### 1. 公开配置 (无鉴权)
+$ curl -H 'api-version: 31' 'https://ailwapi360.waveabc.xyz/api/configs/public/system' -o /tmp/c.json
+
+[HTTP 200 | 1.478846s | 13877B]
+
+  -> {"ai.aspect_ratios":[{"name":"1:1","scales":{"1x":{"width":512,"height":512,"multiplier":1},"2x":{"width":1024,"height":...
+
+### 2. 风格列表 (无鉴权)
+$ curl -H 'api-version: 31' 'https://ailwapi360.waveabc.xyz/api/public/ai-samples/styles' -o /tmp/s.json
+
+[HTTP 200 | 2.036784s | 63410B]
+
+  -> [{"uuid":"89d874da-2dd4-4488-aad6-a1eed5b1c3b3","rel_uuid":"","title":"Modern 3D","label":"","badge":"","date":"2023-05-...
+
+### 3. 无 api-version
+$ curl -X POST 'https://ailwapi360.waveabc.xyz/api/service/generate' -H 'Content-Type: application/json' -d '{}'
+{"message":"UUID Error"}
+[HTTP 500 | 1.489752s | 24B]
+
+### 4. api-version=28
+$ curl -X POST 'https://ailwapi360.waveabc.xyz/api/service/generate' -H 'api-version: 28' -H 'Content-Type: application/json' -d '{}'
+{"message":"UUID Error"}
+[HTTP 500 | 1.519720s | 24B]
+
+### 5. uuid=null
+$ curl -X POST 'https://ailwapi360.waveabc.xyz/api/service/generate' -H 'api-version: 31' -H 'Content-Type: application/json' -d '{"prompt":"a cat","uuid":null,"width":512,"height":512,"aspect_ratio":"1:1","restore_faces":false}'
+{"message":"UUID Error"}
+[HTTP 500 | 1.363078s | 24B]
+
+### 6. 合法 body + 无 token
+$ curl -X POST 'https://ailwapi360.waveabc.xyz/api/service/generate' -H 'api-version: 31' -H 'Content-Type: application/json' -d '{"prompt":"a cat","uuid":"89d874da-2dd4-4488-aad6-a1eed5b1c3b3","width":512,"height":512,"aspect_ratio":"1:1","restore_faces":false}'
+{"message":"Token Error. Please contact support!"}
+[HTTP 500 | 1.490160s | 50B]
+
+### 7. 真实 FCM token 生图
+$ curl -X POST 'https://ailwapi360.waveabc.xyz/api/service/generate' -H 'api-version: 31' -H 'device-token: <REDACTED_FCM_TOKEN>' -H 'Content-Type: application/json' -d '{"prompt":"a cat","uuid":"89d874da-2dd4-4488-aad6-a1eed5b1c3b3","width":512,"height":512,"aspect_ratio":"1:1","restore_faces":false}'
+{"message":"Token Error. Please contact support!"}
+[HTTP 500 | 1.779369s | 50B]
+
+### 8. 真实 token + premium=sub 后再生图
+$ curl -X PUT 'https://ailwapi360.waveabc.xyz/api/device/' -H 'api-version: 31' -H 'device-token: <REDACTED_FCM_TOKEN>' -H 'Content-Type: application/json' -d '{"premium":"sub"}'
+"ok"
+[HTTP 200 | 1.455389s | 4B]
+
+### 8b. 生图
+$ curl -X POST 'https://ailwapi360.waveabc.xyz/api/service/generate' -H 'api-version: 31' -H 'device-token: <REDACTED_FCM_TOKEN>' -H 'Content-Type: application/json' -d '{"prompt":"a cat","uuid":"89d874da-2dd4-4488-aad6-a1eed5b1c3b3","width":512,"height":512,"aspect_ratio":"1:1","restore_faces":false}'
+{"message":"Token Error. Please contact support!"}
+[HTTP 500 | 1.571766s | 50B]
+
+### 9. device/ GET (任意 token)
+$ curl 'https://ailwapi360.waveabc.xyz/api/device/' -H 'api-version: 31' -H 'device-token: garbage'
+"garbage"
+[HTTP 200 | 3.246482s | 9B]
+
+### 10. sketch (服务端关闭)
+$ curl -X POST 'https://ailwapi360.waveabc.xyz/api/service/sketch' -H 'api-version: 31' -H 'Content-Type: application/json' -d '{"prompt":"a","uuid":"89d874da-2dd4-4488-aad6-a1eed5b1c3b3","width":512,"height":512,"aspect_ratio":"1:1","restore_faces":false,"sketch":"iVBORw0KGgo="}'
+Sketch generation is disabled
+[HTTP 200 | 1.329663s | 29B]
+
+### 11. upscale (服务端关闭)
+$ curl -X POST 'https://ailwapi360.waveabc.xyz/api/service/upscale' -H 'api-version: 31' -H 'Content-Type: application/json' -d '{"uuid":"89d874da-2dd4-4488-aad6-a1eed5b1c3b3","scale":2}'
+Upscale is disabled
+[HTTP 200 | 2.329189s | 19B]
+
+### 12. OPTIONS device/ (允许方法)
+$ curl -X OPTIONS 'https://ailwapi360.waveabc.xyz/api/device/' -H 'api-version: 31'
+{"type":"https:\/\/tools.ietf.org\/html\/rfc2616#section-10","title":"An error occurred","status":405,"detail":"Method Not Allowed"}
+[HTTP 405 | 1.347421s | 132B]
+

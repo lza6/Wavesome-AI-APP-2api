@@ -1,0 +1,15 @@
+HTTP/1.1 200 Connection established
+
+HTTP/1.1 500 Internal Server Error
+Date: Thu, 29 Oct 2026 21:45:50 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Server: cloudflare
+x-powered-by: PHP/8.3.36
+Cache-Control: no-cache, private
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+cf-cache-status: DYNAMIC
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=j7O3PFxdw47sjf0nlfFerGrUvE3%2FL9caT9f2%2FmVqeoIpP4tXH0zQUYNP3qMIUFB6QkuK3oiSWIJetW1mIx98S%2BhrQSxJfoZX%2Fa6hs6no9h7pa7gmnGk0S9x7BVaOYhsA4ENgJjEMa0s%3D"}]}
+CF-RAY: a5255e8f7b0eedd7-MXP
+

@@ -1,0 +1,299 @@
+{
+  "meta": {
+    "base": "http://127.0.0.1:8934",
+    "mock": true,
+    "device_token": true,
+    "started": "2026-10-30 06:07:44"
+  },
+  "scenarios": [
+    {
+      "scenario": "A1 网关 /health",
+      "path": "/health",
+      "method": "GET",
+      "concurrency": 1,
+      "n": 30,
+      "ok": 30,
+      "fail": 0,
+      "rps_serial_sum": 1266.24,
+      "p50_ms": 6.0,
+      "p90_ms": 14.0,
+      "p99_ms": 17.9,
+      "max_ms": 23.7,
+      "mean_ms": 7.8,
+      "status_codes": {
+        "200": 30
+      },
+      "sample_errors": {}
+    },
+    {
+      "scenario": "A2 网关 /v1/models",
+      "path": "/v1/models",
+      "method": "GET",
+      "concurrency": 1,
+      "n": 30,
+      "ok": 30,
+      "fail": 0,
+      "rps_serial_sum": 1339.95,
+      "p50_ms": 5.3,
+      "p90_ms": 13.6,
+      "p99_ms": 15.2,
+      "max_ms": 22.4,
+      "mean_ms": 7.4,
+      "status_codes": {
+        "200": 30
+      },
+      "sample_errors": {}
+    },
+    {
+      "scenario": "B1 上游 config",
+      "path": "/api/ws/config",
+      "method": "GET",
+      "concurrency": 1,
+      "n": 8,
+      "ok": 8,
+      "fail": 0,
+      "rps_serial_sum": 5.62,
+      "p50_ms": 474.8,
+      "p90_ms": 1293.8,
+      "p99_ms": 1293.8,
+      "max_ms": 1423.4,
+      "mean_ms": 690.9,
+      "status_codes": {
+        "200": 8
+      },
+      "sample_errors": {}
+    },
+    {
+      "scenario": "B2 上游 styles",
+      "path": "/api/ws/styles",
+      "method": "GET",
+      "concurrency": 4,
+      "n": 12,
+      "ok": 12,
+      "fail": 0,
+      "rps_serial_sum": 9.4,
+      "p50_ms": 459.3,
+      "p90_ms": 1202.5,
+      "p99_ms": 1220.2,
+      "max_ms": 1276.3,
+      "mean_ms": 646.9,
+      "status_codes": {
+        "200": 12
+      },
+      "sample_errors": {}
+    },
+    {
+      "scenario": "B3 上游 blocks",
+      "path": "/api/ws/blocks",
+      "method": "GET",
+      "concurrency": 4,
+      "n": 12,
+      "ok": 12,
+      "fail": 0,
+      "rps_serial_sum": 13.8,
+      "p50_ms": 523.3,
+      "p90_ms": 539.4,
+      "p99_ms": 543.3,
+      "max_ms": 869.4,
+      "mean_ms": 551.6,
+      "status_codes": {
+        "200": 12
+      },
+      "sample_errors": {}
+    },
+    {
+      "scenario": "B4 上游 gallery",
+      "path": "/api/ws/gallery",
+      "method": "GET",
+      "concurrency": 4,
+      "n": 12,
+      "ok": 12,
+      "fail": 0,
+      "rps_serial_sum": 18.95,
+      "p50_ms": 452.2,
+      "p90_ms": 469.6,
+      "p99_ms": 487.4,
+      "max_ms": 633.2,
+      "mean_ms": 471.9,
+      "status_codes": {
+        "200": 12
+      },
+      "sample_errors": {}
+    },
+    {
+      "scenario": "C1 上游生成(串行,真实)",
+      "path": "/v1/images/generations",
+      "method": "POST",
+      "concurrency": 1,
+      "n": 3,
+      "ok": 3,
+      "fail": 0,
+      "rps_serial_sum": 0.89,
+      "p50_ms": 14.4,
+      "p90_ms": 14.4,
+      "p99_ms": 14.4,
+      "max_ms": 3377.3,
+      "mean_ms": 1132.4,
+      "status_codes": {
+        "200": 3
+      },
+      "sample_errors": {}
+    },
+    {
+      "scenario": "C2 上游生成(并发4,真实)",
+      "path": "/v1/images/generations",
+      "method": "POST",
+      "concurrency": 4,
+      "n": 8,
+      "ok": 8,
+      "fail": 0,
+      "rps_serial_sum": 389.95,
+      "p50_ms": 14.0,
+      "p90_ms": 20.5,
+      "p99_ms": 20.5,
+      "max_ms": 20.5,
+      "mean_ms": 13.4,
+      "status_codes": {
+        "200": 8
+      },
+      "sample_errors": {}
+    },
+    {
+      "scenario": "D1 出图 mock c=8",
+      "path": "/v1/images/generations",
+      "method": "POST",
+      "concurrency": 8,
+      "n": 32,
+      "ok": 32,
+      "fail": 0,
+      "rps_serial_sum": 567.19,
+      "p50_ms": 36.9,
+      "p90_ms": 51.1,
+      "p99_ms": 54.7,
+      "max_ms": 56.4,
+      "mean_ms": 35.1,
+      "status_codes": {
+        "200": 32
+      },
+      "sample_errors": {}
+    },
+    {
+      "scenario": "D2 出图 mock c=16",
+      "path": "/v1/images/generations",
+      "method": "POST",
+      "concurrency": 16,
+      "n": 64,
+      "ok": 64,
+      "fail": 0,
+      "rps_serial_sum": 503.51,
+      "p50_ms": 83.9,
+      "p90_ms": 111.1,
+      "p99_ms": 125.7,
+      "max_ms": 127.1,
+      "mean_ms": 72.5,
+      "status_codes": {
+        "200": 64
+      },
+      "sample_errors": {}
+    },
+    {
+      "scenario": "E1 空 prompt -> 400",
+      "path": "/v1/images/generations",
+      "method": "POST",
+      "concurrency": 1,
+      "n": 6,
+      "ok": 6,
+      "fail": 0,
+      "rps_serial_sum": 321.84,
+      "p50_ms": 5.9,
+      "p90_ms": 7.5,
+      "p99_ms": 7.5,
+      "max_ms": 18.6,
+      "mean_ms": 8.0,
+      "status_codes": {
+        "400": 6
+      },
+      "sample_errors": {}
+    },
+    {
+      "scenario": "E3 未知路径实例(404 由 Flask 抛)",
+      "path": "/nope",
+      "method": "GET",
+      "concurrency": 1,
+      "n": 4,
+      "ok": 4,
+      "fail": 0,
+      "rps_serial_sum": 295.09,
+      "p50_ms": 6.0,
+      "p90_ms": 6.1,
+      "p99_ms": 6.1,
+      "max_ms": 13.6,
+      "mean_ms": 7.4,
+      "status_codes": {
+        "404": 4
+      },
+      "sample_errors": {}
+    }
+  ],
+  "gateway_stats": {
+    "endpoints": {
+      "/api/ws/blocks": {
+        "count": 12,
+        "errors": 0,
+        "mean_ms": 543.39,
+        "p50_ms": 515.47,
+        "p90_ms": 535.26,
+        "p99_ms": 864.96
+      },
+      "/api/ws/config": {
+        "count": 8,
+        "errors": 0,
+        "mean_ms": 681.68,
+        "p50_ms": 463.33,
+        "p90_ms": 1289.82,
+        "p99_ms": 1415.62
+      },
+      "/api/ws/gallery": {
+        "count": 12,
+        "errors": 0,
+        "mean_ms": 464.22,
+        "p50_ms": 447.29,
+        "p90_ms": 479.04,
+        "p99_ms": 628.52
+      },
+      "/api/ws/styles": {
+        "count": 12,
+        "errors": 0,
+        "mean_ms": 639.4,
+        "p50_ms": 450.88,
+        "p90_ms": 1216.02,
+        "p99_ms": 1262.1
+      },
+      "/health": {
+        "count": 31,
+        "errors": 0,
+        "mean_ms": 0.0,
+        "p50_ms": 0.0,
+        "p90_ms": 0.0,
+        "p99_ms": 0.0
+      },
+      "/v1/images/generations": {
+        "count": 113,
+        "errors": 6,
+        "mean_ms": 32.12,
+        "p50_ms": 1.45,
+        "p90_ms": 5.86,
+        "p99_ms": 15.29
+      },
+      "/v1/models": {
+        "count": 30,
+        "errors": 0,
+        "mean_ms": 0.0,
+        "p50_ms": 0.0,
+        "p90_ms": 0.0,
+        "p99_ms": 0.01
+      }
+    },
+    "uptime_s": 28.4
+  }
+}

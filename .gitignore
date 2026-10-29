@@ -1,0 +1,24 @@
+# 反编译 / 打包产物（体积大，不入库）
+unzip/
+apktool_out/
+jadx_out/
+*.apk
+*.zip
+__pycache__/
+*.pyc
+
+# 运行时产物
+out/
+*.log
+*.err
+
+# 真实设备凭证（FCM token 等于账号，禁止入库）
+probe/token*.txt
+!probe/token2.txt.example
+probe/*.bin
+
+# 大体积工具二进制
+tools/frida-server-*
+
+# 恢复后自动抓的样本
+evidence/recovered_*
